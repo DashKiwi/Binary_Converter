@@ -4,16 +4,13 @@ def int_checker(message, allowed, base):
 	while True:
 		try:
 			number = input(message).capitalize()
-			number_array = []
 			if number != "" and number != "E":
 				for i in number:
-					number_array.append(i)
-				for i in number_array:
 					if i not in allowed:
 						raise
 			return number
 		except:
-			print(f"Please enter a vaild {base} number\n")
+			print(f"Please enter a valid {base} number\n")
 
 def two_to_ten():
 	while True:
@@ -31,7 +28,7 @@ def two_to_ten():
 				integer += counter
 			counter = counter * 2
 		os.system("cls||clear")
-		print(f"~~~~ RESULT ~~~~\nThe base-10 number for {base2} is {integer}\n~~~~~~~~~~~~~~~~\n")
+		print(f"~~~~ RESULT ~~~~\nThe base-10 number for base-2 {base2} is {integer}\n~~~~~~~~~~~~~~~~\n")
 
 def ten_to_two():
 	while True:
@@ -62,7 +59,7 @@ def ten_to_two():
 				integer -= place_value
 			place_value = place_value / 2
 		for i in byte:
-			if i == False:
+			if not i:
 				binary += "0"
 				if binary == "0" and shorten == True:
 					binary = ""
@@ -70,21 +67,25 @@ def ten_to_two():
 				binary += "1"
 		extra_message = ""
 		if integer > 0:
-			extra_message = f"BEWARE The number you have entered excedes the {bit_number} bit limit\nThis means that it will return a series of 1's\n"
+			extra_message = f"BEWARE The number you have entered exceeds the {bit_number} bit limit\nThis means that it will return a series of 1's\n"
 		os.system("cls||clear")
-		print(f"~~~~ RESULT ~~~~\n{extra_message}The base-2 number for {base10} is {binary}\n~~~~~~~~~~~~~~~~\n")
+		print(f"~~~~ RESULT ~~~~\n{extra_message}The base-2 number for base-10 {base10} is {binary}\n~~~~~~~~~~~~~~~~\n")
 
 def main_menu():
 	os.system("cls||clear")
-	print("~~~~ Binary Converter by DashKiwi ~~~~\n")
-	choice = input("Please enter a corrosponding number:\n\n1. Base-10 to Base-2\n2. Base-2 to Base-10\n3. Exit\n\n>> ")
-	if choice == "1":
-		os.system("cls||clear")
-		ten_to_two()
-	elif choice == "2":
-		os.system("cls||clear")
-		two_to_ten()
-	elif choice == "3":
-		quit()
+	while True:
+		print("~~~~ Binary Converter by DashKiwi ~~~~\n")
+		choice = input("Please enter a corresponding number:\n\n1. Base-10 to Base-2\n2. Base-2 to Base-10\n3. Exit\n\n>> ")
+		if choice == "1":
+			os.system("cls||clear")
+			ten_to_two()
+		elif choice == "2":
+			os.system("cls||clear")
+			two_to_ten()
+		elif choice == "3":
+			quit()
+		else:
+			os.system("cls||clear")
+			print("Please enter a valid Base-10 number (1-3)\n")
 
 main_menu()
