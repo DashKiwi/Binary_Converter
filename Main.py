@@ -3,10 +3,13 @@ import os
 def int_checker(message, allowed, base):
 	while True:
 		try:
-			number = input(message).capitalize()
+			number = input(message).upper()
+			if "#" in number[0] and base == "Hex":
+				number = number[1:]
 			if number != "" and number != "E":
 				for i in number:
 					if i not in allowed:
+						print(i, allowed)
 						raise
 			return number
 		except:
@@ -71,8 +74,26 @@ def ten_to_two():
 		os.system("cls||clear")
 		print(f"~~~~ RESULT ~~~~\n{extra_message}The base-2 number for base-10 {base10} is {binary}\n~~~~~~~~~~~~~~~~\n")
 
+def hex_to_rgb():
+	allowed_inputs = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+	while True:
+		print("~~~~ Hex to RGB ~~~~\n\nEnter E to return to main menu")
+		hex_code = list(int_checker("Please input the hex code to convert to RGB\n#", allowed_inputs, "Hex"))
+		r = g = b = 0
+		for i in range(len(hex_code)):
+			if i >= 4 and i <= 5:
+				b += allowed_inputs.index(str(hex_code[i]))
+			elif i >= 2 and i <= 3:
+				g += allowed_inputs.index(str(hex_code[i]))
+			elif i >= 0 and i <= 1:
+				r += allowed_inputs.index(str(hex_code[i]))
+			else:
+				break
+		print(r,g,b)
+
 def main_menu():
 	os.system("cls||clear")
+	hex_to_rgb()
 	while True:
 		print("~~~~ Binary Converter by DashKiwi ~~~~\n")
 		choice = input("Please enter a corresponding number:\n\n1. Base-10 to Base-2\n2. Base-2 to Base-10\n3. Exit\n\n>> ")
