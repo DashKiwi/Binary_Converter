@@ -78,25 +78,27 @@ def hex_to_rgb():
 	allowed_inputs = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
 	while True:
 		print("~~~~ Hex to RGB ~~~~\n\nEnter E to return to main menu")
-		hex_code = list(int_checker("Please input the hex code to convert to RGB\n#", allowed_inputs, "Hex"))
+		hex_code = int_checker("Please input the hex code to convert to RGB\n#", allowed_inputs, "Hex")
+		hex_code_lst = list(hex_code)
+		hex_code_lst = list(reversed(hex_code_lst))
 		r = g = b = 0
-		for i in range(len(hex_code)):
+		for i in range(len(hex_code_lst)):
 			if i >= 4 and i <= 5:
-				b += allowed_inputs.index(str(hex_code[i]))
+				r += (16 ** (i - 4)) * allowed_inputs.index(str(hex_code_lst[i]))
 			elif i >= 2 and i <= 3:
-				g += allowed_inputs.index(str(hex_code[i]))
+				g += (16 ** (i - 2)) * allowed_inputs.index(str(hex_code_lst[i]))
 			elif i >= 0 and i <= 1:
-				r += allowed_inputs.index(str(hex_code[i]))
+				b += (16 ** i) * allowed_inputs.index(str(hex_code_lst[i]))
 			else:
 				break
-		print(r,g,b)
+		os.system("cls||clear")
+		print(f"~~~~ RESULT ~~~~\nThe RGB code number for hex {hex_code} is {r, g, b}\n~~~~~~~~~~~~~~~~\n")
 
 def main_menu():
 	os.system("cls||clear")
-	hex_to_rgb()
 	while True:
 		print("~~~~ Binary Converter by DashKiwi ~~~~\n")
-		choice = input("Please enter a corresponding number:\n\n1. Base-10 to Base-2\n2. Base-2 to Base-10\n3. Exit\n\n>> ")
+		choice = input("Please enter a corresponding number:\n\n1. Base-10 to Base-2\n2. Base-2 to Base-10\n3. Hex to RGB\n4. Exit\n\n>> ")
 		if choice == "1":
 			os.system("cls||clear")
 			ten_to_two()
@@ -104,6 +106,9 @@ def main_menu():
 			os.system("cls||clear")
 			two_to_ten()
 		elif choice == "3":
+			os.system("cls||clear")
+			hex_to_rgb()
+		elif choice == "4":
 			quit()
 		else:
 			os.system("cls||clear")
