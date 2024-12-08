@@ -81,6 +81,10 @@ def hex_to_rgb():
 		hex_code = int_checker("Please input the hex code to convert to RGB\n#", allowed_inputs, "Hex")
 		hex_code_lst = list(hex_code)
 		hex_code_lst = list(reversed(hex_code_lst))
+		j = 1
+		while len(hex_code_lst) < 6:
+			hex_code_lst.insert(j, allowed_inputs[allowed_inputs.index(str(hex_code_lst[j - 1]))])
+			j += 2
 		r = g = b = 0
 		for i in range(len(hex_code_lst)):
 			if i >= 4 and i <= 5:
